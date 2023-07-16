@@ -41,24 +41,25 @@
 
                 <Button
                     style="@style/CatButton"
-                    android:text="Entrees" />
+                    android:text="@string/entrees"
+                    android:onClick="onCategoryClicked"/>
 
                 <Button
                     style="@style/CatButton"
-                    android:text="Appetizers" />
+                    android:text="@string/appetizers"
+                    android:onClick="onCategoryClicked"/>
 
                 <Button
                     style="@style/CatButton"
-                    android:text="Desserts" />
+                    android:text="@string/desserts"
+                    android:onClick="onCategoryClicked"/>
 
                 <Button
                     style="@style/CatButton"
-                    android:text="Drinks" />
+                    android:text="@string/drinks"
+                    android:onClick="onCategoryClicked"/>
 
             </GridLayout>
-
-
-
 
         </LinearLayout>
     </LinearLayout>
