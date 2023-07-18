@@ -13,13 +13,21 @@
         android:theme="@style/Theme.RecipeBook"
         tools:targetApi="31">
         <activity
-            android:name=".RecipeListActivity"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:name=".RecipeEditActivity"
+            android:exported="false"
+            android:parentActivityName=".RecipeListActivity"/>
+        <activity
+            android:name=".RecipeCreateActivity"
+            android:exported="false"
+            android:parentActivityName=".RecipeListActivity" />
         <activity
             android:name=".RecipeDetailActivity"
-            android:parentActivityName=".RecipeListActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".RecipeListActivity" />
+        <activity
+            android:name=".RecipeListActivity"
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">

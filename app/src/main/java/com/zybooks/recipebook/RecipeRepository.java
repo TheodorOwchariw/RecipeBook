@@ -9,7 +9,7 @@ public class RecipeRepository {
 
 
     private static RecipeRepository instance;
-    private List<Recipe> mRecipeList;
+    private List<Recipe> recipeList;
 
     public RecipeRepository getInstance(Context context)
     {
@@ -22,8 +22,7 @@ public class RecipeRepository {
 
     private RecipeRepository(Context context)
     {
-        mRecipeList = new ArrayList<>();
-
+        recipeList = new ArrayList<>();
     }
 
 
