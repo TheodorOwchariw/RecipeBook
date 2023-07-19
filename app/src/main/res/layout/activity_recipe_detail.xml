@@ -7,9 +7,10 @@
     tools:context=".RecipeDetailActivity">
 
     <TextView
+        android:id="@+id/chosen_recipe"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="RECIPE DETAIL ACTIVITY"
+        android:text="Chosen Recipe"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

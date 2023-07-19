@@ -25,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public void onCategoryClicked(View view)
     {
+      //  RecipeRepository.getInstance().currentCategory =
+        //textbook example
         Intent intent = new Intent(this, RecipeListActivity.class);
         Button clickedButton = (Button) view;
         String category = clickedButton.getText().toString();

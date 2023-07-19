@@ -1,5 +1,7 @@
 package com.zybooks.recipebook;
 
+import android.widget.ImageView;
+
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
@@ -9,6 +11,8 @@ public class Recipe {
     private ArrayList<String> ingredients;
     private ArrayList<String> instructions;
     private String notes;
+    private ImageView picture;
+    private int index;
 
     //constructors
     public Recipe()
@@ -44,6 +48,7 @@ public class Recipe {
     {
         return notes;
     }
+    public int getIndex() {return index; }
 
     //mutators
     public void setCatName(String name)
@@ -69,6 +74,15 @@ public class Recipe {
     public void setNotes(String str)
     {
         notes = str;
+    }
+    public void setIndex(int i)
+    {
+        index = i;
+    }
+
+    @Override
+    public String toString() {
+        return this.recipeName;  // Assuming your Recipe class has a recipeName field
     }
 
 
