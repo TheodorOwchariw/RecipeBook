@@ -17,5 +17,13 @@ public class RecipeDetailActivity extends AppCompatActivity {
         TextView textViewRecipeName = findViewById(R.id.chosen_recipe);
         textViewRecipeName.setText(RecipeRepository.currentRecipe.getRecipeName());
 
+
+        TextView textViewIngredients = findViewById(R.id.chosen_ingredients);
+        textViewIngredients.setText(RecipeRepository.currentRecipe.getIngredients());
+
+        TextView textViewInstructions = findViewById(R.id.chosen_instructions);
+        textViewInstructions.setText(RecipeRepository.currentRecipe.getInstructions());
+
+
     }
 }

@@ -25,6 +25,7 @@
         private final AtomicInteger deleteFlag= new AtomicInteger(0);
         private final AtomicInteger editFlag = new AtomicInteger(0);
         private final AtomicInteger selectedPosition = new AtomicInteger();
+
         private ListView recipeListView;
         private ArrayAdapter<Recipe> adapter;
 
@@ -37,7 +38,68 @@
             recipeListView = findViewById(R.id.recipe_list);
 
             // Get the recipe list from your repository
-            ArrayList<Recipe> recipeList = RecipeRepository.getInstance().getEntreeRecipeList();
+
+
+            // Find the TextView in the layout
+            TextView chosenCategory = (TextView) findViewById(R.id.chosen_category);
+
+            // Load the category from SharedPreferences
+            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
+            String category = sharedPref.getString("chosen_category", "");
+
+
+            // Set the text of the TextView to the category from SharedPreferences
+            chosenCategory.setText(category);
+            RecipeRepository.currentCategory = Enum.valueOf(RecipeRepository.Category.class, category);
+
+            Intent intent = getIntent();
+            String newCategory = intent.getStringExtra(MainActivity.EXTRA_CATEGORY);
+
+            // Check if a new category was received from MainActivity
+            // ** CHATGPT **
+            if (newCategory != null && !newCategory.equals("")) {
+                // Update the category with new value from MainActivity
+                category = newCategory;
+
+                // Update the TextView
+                chosenCategory.setText(category);
+
+                // Save the new category in SharedPreferences
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("chosen_category", category);
+                editor.apply();
+            }
+
+            ArrayList<Recipe> recipeList = new ArrayList<>();
+
+            switch (category) {
+                case "Entrees":
+                {
+                    recipeList = RecipeRepository.getInstance().getEntreeRecipeList();
+                    RecipeRepository.currentCategory = RecipeRepository.Category.Entrees;
+                    break;
+                }
+                case "Appetizers":
+                {
+                    recipeList = RecipeRepository.getInstance().getAppetizerRecipeList();
+                    RecipeRepository.currentCategory = RecipeRepository.Category.Appetizers;
+                    break;
+                }
+                case "Desserts":
+                {
+                    recipeList = RecipeRepository.getInstance().getDessertRecipeList();
+                    RecipeRepository.currentCategory = RecipeRepository.Category.Desserts;
+                    break;
+                }
+                case "Drinks":
+                {
+                    recipeList = RecipeRepository.getInstance().getDrinkRecipeList();
+                    RecipeRepository.currentCategory = RecipeRepository.Category.Drinks;
+                    break;
+                }
+            }
+
+            //ArrayList<Recipe> recipeList = RecipeRepository.getInstance().getEntreeRecipeList();
 
             // Create adapter passing in the recipe list
             adapter = new ArrayAdapter<>(
@@ -72,33 +134,6 @@
                 }
             });
 
-            // Find the TextView in the layout
-            TextView chosenCategory = (TextView) findViewById(R.id.chosen_category);
-
-            // Load the category from SharedPreferences
-            SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
-            String category = sharedPref.getString("chosen_category", "");
-
-            // Set the text of the TextView to the category from SharedPreferences
-            chosenCategory.setText(category);
-
-            Intent intent = getIntent();
-            String newCategory = intent.getStringExtra(MainActivity.EXTRA_CATEGORY);
-
-            // Check if a new category was received from MainActivity
-            // ** CHATGPT **
-            if (newCategory != null && !newCategory.equals("")) {
-                // Update the category with new value from MainActivity
-                category = newCategory;
-
-                // Update the TextView
-                chosenCategory.setText(category);
-
-                // Save the new category in SharedPreferences
-                SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("chosen_category", category);
-                editor.apply();
-            }
 
             FloatingActionButton mainFab = findViewById(R.id.fab_main);
             FloatingActionButton fab1= findViewById(R.id.fab1);
@@ -155,21 +190,33 @@
         }
 
         private void refreshRecipeList() {
-            // Get the updated recipe list from your repository
-//            switch(/* most recent recipe added */)
-//            {
-//
-//            }
-            ArrayList<Recipe> updatedRecipeList = new ArrayList<>(RecipeRepository.getInstance().getEntreeRecipeList());
+                ArrayList<Recipe> updatedRecipeList = new ArrayList<>();
 
-            RecipeRepository.getInstance();
-            // Clear the existing list in the adapter and add the new list
-            adapter.clear();
-            adapter.addAll(updatedRecipeList);
+                switch (RecipeRepository.currentCategory) {
+                    case Entrees: {
+                        updatedRecipeList = RecipeRepository.getInstance().getEntreeRecipeList();
+                        break;
+                    }
+                    case Appetizers: {
+                        updatedRecipeList = RecipeRepository.getInstance().getAppetizerRecipeList();
+                        break;
+                    }
+                    case Desserts: {
+                        updatedRecipeList = RecipeRepository.getInstance().getDessertRecipeList();
+                        break;
+                    }
+                    case Drinks: {
+                        updatedRecipeList = RecipeRepository.getInstance().getDrinkRecipeList();
+                        break;
+                    }
+                }
 
-            // Notify the adapter that the data set has changed
-            adapter.notifyDataSetChanged();
-        }
+            ListView listView = findViewById(R.id.recipe_list);
+
+            // Replace the adapter with a new one, instead of clearing and adding to the old one
+                adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, updatedRecipeList);
+                listView.setAdapter(adapter);
+            }
 
     }
 

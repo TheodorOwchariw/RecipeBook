@@ -8,7 +8,7 @@ import java.util.List;
 public class RecipeRepository {
 
     //used to keep track of what the current category is so it can display the correct list
-    public enum Category {Entree, Appetizer, Dessert, Drink}
+    public enum Category {Entrees, Appetizers, Desserts, Drinks}
 
     public static Category currentCategory;
     public static Recipe currentRecipe;
@@ -70,7 +70,27 @@ public class RecipeRepository {
     {
         //add persistent version of this function
         // Database.Add() sort of thing
-        entreeRecipeList.add(recipe);
+        //entreeRecipeList.add(recipe);
+
+        switch (RecipeRepository.currentCategory) {
+            case Entrees: {
+                entreeRecipeList.add(recipe);
+                break;
+            }
+            case Appetizers: {
+                appetizerRecipeList.add(recipe);
+                break;
+            }
+            case Desserts: {
+                dessertRecipeList.add(recipe);
+                break;
+            }
+            case Drinks: {
+                drinkRecipeList.add(recipe);
+                break;
+            }
+        }
+
     }
 
     public void Remove(int index)

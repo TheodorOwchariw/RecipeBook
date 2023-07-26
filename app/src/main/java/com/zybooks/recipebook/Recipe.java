@@ -8,8 +8,9 @@ import java.util.ArrayList;
 public class Recipe {
     private String catName;
     private String recipeName;
-    private ArrayList<String> ingredients;
-    private ArrayList<String> instructions;
+    private String ingredients;
+    //private ArrayList<String> instructions;
+    private String instructions;
     private String notes;
     private ImageView picture;
     private int index;
@@ -19,8 +20,8 @@ public class Recipe {
     {
         catName = "";
         recipeName = "";
-        ingredients = new ArrayList<>();
-        instructions = new ArrayList<>();
+        ingredients = "";
+        instructions = "";
         notes = "";
     }
 
@@ -35,11 +36,17 @@ public class Recipe {
         return recipeName;
     }
 
+    /*
     public ArrayList<String> getIngredients() {
+        return ingredients;
+    } */
+
+    public String getIngredients()
+    {
         return ingredients;
     }
 
-    public ArrayList<String> getInstructions()
+    public String getInstructions()
     {
         return instructions;
     }
@@ -61,14 +68,14 @@ public class Recipe {
         recipeName = name;
     }
 
-    public void setIngredients(ArrayList<String> list)
+    public void setIngredients(String string)
     {
-        ingredients = list;
+        ingredients = string;
     }
 
-    public void setInstructions(ArrayList<String> list)
+    public void setInstructions(String string)
     {
-        instructions = list;
+        instructions = string;
     }
 
     public void setNotes(String str)
