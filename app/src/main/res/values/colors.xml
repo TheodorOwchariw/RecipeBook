@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
+    <color name="gray">#C0C0C0</color>
+    <color name="topColor">@android:color/holo_orange_light</color>
     <color name="white">#FFFFFFFF</color>
 </resources>
