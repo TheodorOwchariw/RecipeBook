@@ -21,7 +21,7 @@
 
     public class RecipeListActivity extends AppCompatActivity {
 
-        private final AtomicInteger fabClicked= new AtomicInteger(1);
+        private final AtomicInteger mainFabFlag= new AtomicInteger(0);
         private final AtomicInteger deleteFlag= new AtomicInteger(0);
         private final AtomicInteger editFlag = new AtomicInteger(0);
         private final AtomicInteger selectedPosition = new AtomicInteger();
@@ -109,11 +109,11 @@
             fab3.hide();
 
             mainFab.setOnClickListener(view -> {
-                if(fabClicked.get()==1) {
+                if(mainFabFlag.get()==0) {
                     fab1.show();
                     fab2.show();
                     fab3.show();
-                    fabClicked.decrementAndGet();
+                    mainFabFlag.incrementAndGet();
                     mainFab.setImageDrawable(getDrawable(R.drawable.downarrow));
                 }
                 else
@@ -121,7 +121,7 @@
                     fab1.hide();
                     fab2.hide();
                     fab3.hide();
-                    fabClicked.incrementAndGet();
+                    mainFabFlag.decrementAndGet();
                     mainFab.setImageDrawable(getDrawable(R.drawable.uparrow));
                 }
             });
