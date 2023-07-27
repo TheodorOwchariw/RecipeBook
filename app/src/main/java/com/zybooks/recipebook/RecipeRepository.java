@@ -19,10 +19,10 @@ public class RecipeRepository {
     private ArrayList<Recipe> dessertRecipeList;
     private ArrayList<Recipe> drinkRecipeList;
 
-    public static int entreeCount;
-    public static int appetizerCount;
-    public static int dessertCount;
-    public static int drinkCount;
+    private static int entreeCount;
+    private static int appetizerCount;
+    private static int dessertCount;
+    private static int drinkCount;
 
     public static RecipeRepository getInstance(/*Context context*/)
     {
@@ -43,6 +43,7 @@ public class RecipeRepository {
         appetizerCount = 0;
         dessertCount = 0;
         drinkCount = 0;
+        currentCategory = Category.Entrees;
     }
 
     //getters
@@ -65,6 +66,10 @@ public class RecipeRepository {
     {
         return drinkRecipeList;
     }
+    public int getEntreeCount() {return entreeCount;}
+    public int getAppetizerCount() {return appetizerCount;}
+    public int getDessertCount() {return dessertCount;}
+    public int getDrinkCount() {return drinkCount;}
 
     public void Add(Recipe recipe)
     {
@@ -90,13 +95,49 @@ public class RecipeRepository {
                 break;
             }
         }
+    }
 
+    public void incrementCount() {
+        switch (RecipeRepository.currentCategory) {
+            case Entrees: {
+                entreeCount++;
+                break;
+            }
+            case Appetizers: {
+                appetizerCount++;
+                break;
+            }
+            case Desserts: {
+                dessertCount++;
+                break;
+            }
+            case Drinks: {
+                drinkCount++;
+                break;
+            }
+        }
     }
 
     public void Remove(int index)
     {
-        entreeRecipeList.remove(index);
-        entreeCount--;
+        switch (RecipeRepository.currentCategory) {
+            case Entrees: {
+                entreeRecipeList.remove(index);
+                break;
+            }
+            case Appetizers: {
+                appetizerRecipeList.remove(index);
+                break;
+            }
+            case Desserts: {
+                dessertRecipeList.remove(index);
+                break;
+            }
+            case Drinks: {
+                drinkRecipeList.remove(index);
+                break;
+            }
+        }
     }
 
 }

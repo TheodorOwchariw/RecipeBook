@@ -23,6 +23,7 @@ public class Recipe {
         ingredients = "";
         instructions = "";
         notes = "";
+
     }
 
     //accessors

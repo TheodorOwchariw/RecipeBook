@@ -16,7 +16,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
     public void onCreateClicked (View view)
     {
         Recipe recipe = new Recipe();
-        recipe.setIndex(RecipeRepository.entreeCount);
+        recipe.setIndex(RecipeRepository.getInstance().getEntreeCount());
         EditText editRecipeName = findViewById(R.id.edit_recipe_name);
         recipe.setRecipeName(editRecipeName.getText().toString());
 
@@ -28,7 +28,7 @@ public class RecipeCreateActivity extends AppCompatActivity {
 
 
         RecipeRepository.getInstance().Add(recipe);
-        RecipeRepository.entreeCount++;
+        RecipeRepository.getInstance().incrementCount();
     }
 
 }

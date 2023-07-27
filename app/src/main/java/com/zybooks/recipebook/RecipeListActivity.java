@@ -48,6 +48,7 @@
             String category = sharedPref.getString("chosen_category", "");
 
 
+
             // Set the text of the TextView to the category from SharedPreferences
             chosenCategory.setText(category);
             RecipeRepository.currentCategory = Enum.valueOf(RecipeRepository.Category.class, category);
