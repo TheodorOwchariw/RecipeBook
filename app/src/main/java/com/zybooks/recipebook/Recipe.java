@@ -1,47 +1,55 @@
 package com.zybooks.recipebook;
 
 import android.widget.ImageView;
+import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+@Entity
 public class Recipe {
-    private String catName;
+
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private int id;
+
+    @ColumnInfo(name = "name")
     private String recipeName;
+
+    @ColumnInfo(name = "ingredients")
     private String ingredients;
-    //private ArrayList<String> instructions;
+
+    @ColumnInfo(name = "instructions")
     private String instructions;
-    private String notes;
+
+
+    /*  private String notes;
+    @ColumnInfo
     private ImageView picture;
+    */
     private int index;
 
     //constructors
     public Recipe()
     {
-        catName = "";
+        //catName = "";
         recipeName = "";
         ingredients = "";
         instructions = "";
-        notes = "";
+        //notes = "";
 
     }
 
     //accessors
-    public String getCatName()
-    {
-        return catName;
-    }
-
+    public int getId() {return id;}
     public String getRecipeName()
     {
         return recipeName;
     }
-
-    /*
-    public ArrayList<String> getIngredients() {
-        return ingredients;
-    } */
-
     public String getIngredients()
     {
         return ingredients;
@@ -52,17 +60,13 @@ public class Recipe {
         return instructions;
     }
 
-    public String getNotes()
-    {
-        return notes;
-    }
+//    //public String getNotes()
+//    {
+//        return notes;
+//    }
     public int getIndex() {return index; }
 
     //mutators
-    public void setCatName(String name)
-    {
-        catName = name;
-    }
 
     public void setRecipeName(String name)
     {
@@ -79,10 +83,10 @@ public class Recipe {
         instructions = string;
     }
 
-    public void setNotes(String str)
-    {
-        notes = str;
-    }
+//    //public void setNotes(String str)
+//    {
+//        notes = str;
+//    }
     public void setIndex(int i)
     {
         index = i;
@@ -92,7 +96,4 @@ public class Recipe {
     public String toString() {
         return this.recipeName;  // Assuming your Recipe class has a recipeName field
     }
-
-
-
 }

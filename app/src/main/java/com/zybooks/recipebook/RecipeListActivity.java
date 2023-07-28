@@ -1,12 +1,16 @@
     package com.zybooks.recipebook;
 
     import androidx.appcompat.app.AppCompatActivity;
+    import androidx.fragment.app.Fragment;
+    import androidx.fragment.app.FragmentManager;
+    import androidx.fragment.app.FragmentTransaction;
 
     import android.app.LauncherActivity;
     import android.content.Context;
     import android.content.Intent;
     import android.content.SharedPreferences;
     import android.os.Bundle;
+    import android.view.View;
     import android.widget.ArrayAdapter;
     import android.widget.Button;
     import android.widget.ListView;
@@ -123,8 +127,20 @@
                 }
                 else if (editFlag.get() == 1) {
                     RecipeRepository.currentRecipe = adapter.getItem(selectedPosition.get());
-                    Intent editIntent = new Intent(this, RecipeEditActivity.class);
-                    startActivity(editIntent);
+//
+//                    FragmentManager fragmentManager = getSupportFragmentManager();
+//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//
+//                    Fragment editFragment = new RecipeEditFragment();
+//                    fragmentTransaction.replace(R.id.list_constraint_container, editFragment, "asdfasdf");
+//                    fragmentTransaction.commit();
+                    View editFragmentView = getLayoutInflater().inflate(R.layout.fragment_recipe_edit, null);
+                    setContentView(editFragmentView);
+
+
+
+                    //Intent editIntent = new Intent(this, RecipeEditActivity.class);
+                    //startActivity(editIntent);
                     editFlag.set(0);
                 }
                 else
@@ -188,6 +204,12 @@
         protected void onResume() {
             super.onResume();
             refreshRecipeList();
+        }
+
+        @Override
+        public void onBackPressed() {
+            super.onBackPressed();
+            setContentView(R.layout.activity_recipe_list);
         }
 
         private void refreshRecipeList() {
