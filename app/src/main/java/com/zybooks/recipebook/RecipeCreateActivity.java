@@ -16,7 +16,6 @@ public class RecipeCreateActivity extends AppCompatActivity {
     public void onCreateClicked (View view)
     {
         Recipe recipe = new Recipe();
-        recipe.setIndex(RecipeRepository.getInstance().getEntreeCount());
         EditText editRecipeName = findViewById(R.id.edit_recipe_name);
         recipe.setRecipeName(editRecipeName.getText().toString());
 
@@ -26,9 +25,10 @@ public class RecipeCreateActivity extends AppCompatActivity {
         EditText editRecipeInstructions = findViewById(R.id.edit_recipe_instructions);
         recipe.setInstructions(editRecipeInstructions.getText().toString());
 
+        recipe.setCategoryName((RecipeRepository.currentCategory).toString());
 
-        RecipeRepository.getInstance().Add(recipe);
-        RecipeRepository.getInstance().incrementCount();
+        RecipeRepository.getInstance(getApplicationContext()).Add(recipe);
+        RecipeRepository.getInstance(getApplicationContext()).incrementCount();
     }
 
 }

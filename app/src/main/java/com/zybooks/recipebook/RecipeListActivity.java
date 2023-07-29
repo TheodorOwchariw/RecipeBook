@@ -10,6 +10,7 @@
     import android.content.Intent;
     import android.content.SharedPreferences;
     import android.os.Bundle;
+    import android.util.Log;
     import android.view.View;
     import android.widget.ArrayAdapter;
     import android.widget.Button;
@@ -55,7 +56,8 @@
 
             // Set the text of the TextView to the category from SharedPreferences
             chosenCategory.setText(category);
-            RecipeRepository.currentCategory = Enum.valueOf(RecipeRepository.Category.class, category);
+
+            //RecipeRepository.currentCategory = Enum.valueOf(RecipeRepository.Category.class, category);
 
             Intent intent = getIntent();
             String newCategory = intent.getStringExtra(MainActivity.EXTRA_CATEGORY);
@@ -80,31 +82,36 @@
             switch (category) {
                 case "Entrees":
                 {
-                    recipeList = RecipeRepository.getInstance().getEntreeRecipeList();
+                    RecipeRepository.currentCategory = RecipeRepository.Category.Entrees;
+                    recipeList = RecipeRepository.getInstance(getApplicationContext()).getEntreeRecipeList();
                     RecipeRepository.currentCategory = RecipeRepository.Category.Entrees;
                     break;
                 }
                 case "Appetizers":
                 {
-                    recipeList = RecipeRepository.getInstance().getAppetizerRecipeList();
+
+                    RecipeRepository.currentCategory = RecipeRepository.Category.Appetizers;
+                    recipeList = RecipeRepository.getInstance(getApplicationContext()).getAppetizerRecipeList();
                     RecipeRepository.currentCategory = RecipeRepository.Category.Appetizers;
                     break;
                 }
                 case "Desserts":
                 {
-                    recipeList = RecipeRepository.getInstance().getDessertRecipeList();
+                    RecipeRepository.currentCategory = RecipeRepository.Category.Desserts;
+                    recipeList = RecipeRepository.getInstance(getApplicationContext()).getDessertRecipeList();
                     RecipeRepository.currentCategory = RecipeRepository.Category.Desserts;
                     break;
                 }
                 case "Drinks":
                 {
-                    recipeList = RecipeRepository.getInstance().getDrinkRecipeList();
+                    RecipeRepository.currentCategory = RecipeRepository.Category.Drinks;
+                    recipeList = RecipeRepository.getInstance(getApplicationContext()).getDrinkRecipeList();
                     RecipeRepository.currentCategory = RecipeRepository.Category.Drinks;
                     break;
                 }
             }
 
-            //ArrayList<Recipe> recipeList = RecipeRepository.getInstance().getEntreeRecipeList();
+            //ArrayList<Recipe> recipeList = RecipeRepository.getInstance(getApplicationContext()).getEntreeRecipeList();
 
             // Create adapter passing in the recipe list
             adapter = new ArrayAdapter<>(
@@ -120,27 +127,16 @@
                 if (deleteFlag.get() == 1)
                 {
                     Recipe recipeToDelete = adapter.getItem(selectedPosition.get());
-                    RecipeRepository.getInstance().Remove(selectedPosition.get());
+                    RecipeRepository.getInstance(getApplicationContext()).Remove(recipeToDelete);
                     adapter.remove(recipeToDelete);
                     adapter.notifyDataSetChanged();
                     deleteFlag.set(0);
                 }
                 else if (editFlag.get() == 1) {
                     RecipeRepository.currentRecipe = adapter.getItem(selectedPosition.get());
-//
-//                    FragmentManager fragmentManager = getSupportFragmentManager();
-//                    FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-//
-//                    Fragment editFragment = new RecipeEditFragment();
-//                    fragmentTransaction.replace(R.id.list_constraint_container, editFragment, "asdfasdf");
-//                    fragmentTransaction.commit();
                     View editFragmentView = getLayoutInflater().inflate(R.layout.fragment_recipe_edit, null);
                     setContentView(editFragmentView);
 
-
-
-                    //Intent editIntent = new Intent(this, RecipeEditActivity.class);
-                    //startActivity(editIntent);
                     editFlag.set(0);
                 }
                 else
@@ -206,30 +202,30 @@
             refreshRecipeList();
         }
 
-        @Override
-        public void onBackPressed() {
-            super.onBackPressed();
-            setContentView(R.layout.activity_recipe_list);
-        }
+//        @Override
+//        public void onBackPressed() {
+//            super.onBackPressed();
+//            setContentView(R.layout.activity_recipe_list);
+//        }
 
         private void refreshRecipeList() {
                 ArrayList<Recipe> updatedRecipeList = new ArrayList<>();
 
                 switch (RecipeRepository.currentCategory) {
                     case Entrees: {
-                        updatedRecipeList = RecipeRepository.getInstance().getEntreeRecipeList();
+                        updatedRecipeList = RecipeRepository.getInstance(getApplicationContext()).getEntreeRecipeList();
                         break;
                     }
                     case Appetizers: {
-                        updatedRecipeList = RecipeRepository.getInstance().getAppetizerRecipeList();
+                        updatedRecipeList = RecipeRepository.getInstance(getApplicationContext()).getAppetizerRecipeList();
                         break;
                     }
                     case Desserts: {
-                        updatedRecipeList = RecipeRepository.getInstance().getDessertRecipeList();
+                        updatedRecipeList = RecipeRepository.getInstance(getApplicationContext()).getDessertRecipeList();
                         break;
                     }
                     case Drinks: {
-                        updatedRecipeList = RecipeRepository.getInstance().getDrinkRecipeList();
+                        updatedRecipeList = RecipeRepository.getInstance(getApplicationContext()).getDrinkRecipeList();
                         break;
                     }
                 }

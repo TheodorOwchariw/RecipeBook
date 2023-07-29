@@ -2,6 +2,8 @@ package com.zybooks.recipebook;
 
 import android.content.Context;
 
+import androidx.room.Room;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,6 +12,9 @@ public class RecipeRepository {
     //used to keep track of what the current category is so it can display the correct list
     public enum Category {Entrees, Appetizers, Desserts, Drinks}
 
+
+    //private static final int NUMBER_OF_THREADS = 4;
+    private final RecipeDao recipeDao;
     public static Category currentCategory;
     public static Recipe currentRecipe;
     private static RecipeRepository instance;
@@ -24,16 +29,16 @@ public class RecipeRepository {
     private static int dessertCount;
     private static int drinkCount;
 
-    public static RecipeRepository getInstance(/*Context context*/)
+    public static RecipeRepository getInstance(Context context)
     {
         if (instance == null)
         {
-            instance = new RecipeRepository();
+            instance = new RecipeRepository(context);
         }
         return instance;
     }
 
-    public RecipeRepository(/*Content context */)
+    public RecipeRepository(Context context)
     {
         entreeRecipeList = new ArrayList<>();
         appetizerRecipeList = new ArrayList<>();
@@ -43,27 +48,43 @@ public class RecipeRepository {
         appetizerCount = 0;
         dessertCount = 0;
         drinkCount = 0;
-        currentCategory = Category.Entrees;
+
+        RecipeDatabase database = Room.databaseBuilder(context, RecipeDatabase.class, "recipe.db")
+                .allowMainThreadQueries()
+                //.addCallback(databaseCallback) used for threading comment out line above when working on threading
+                .build();
+
+        recipeDao = database.recipeDao();
     }
 
     //getters
+
+
+    /* public ArrayList<Recipe> getRecipes()
+    {
+        return new ArrayList<>(recipeDao.getRecipes());
+    } */
     public ArrayList<Recipe> getEntreeRecipeList()
     {
+        entreeRecipeList = new ArrayList<>(recipeDao.getRecipes("Entrees"));
         return entreeRecipeList;
     }
 
     public ArrayList<Recipe> getAppetizerRecipeList()
     {
+        appetizerRecipeList = new ArrayList<>(recipeDao.getRecipes("Appetizers"));
         return appetizerRecipeList;
     }
 
     public ArrayList<Recipe> getDessertRecipeList()
     {
+        dessertRecipeList = new ArrayList<>(recipeDao.getRecipes("Desserts"));
         return dessertRecipeList;
     }
 
     public ArrayList<Recipe> getDrinkRecipeList()
     {
+        drinkRecipeList = new ArrayList<>(recipeDao.getRecipes("Drinks"));
         return drinkRecipeList;
     }
     public int getEntreeCount() {return entreeCount;}
@@ -73,13 +94,11 @@ public class RecipeRepository {
 
     public void Add(Recipe recipe)
     {
-        //add persistent version of this function
-        // Database.Add() sort of thing
-        //entreeRecipeList.add(recipe);
-
+        /*
         switch (RecipeRepository.currentCategory) {
             case Entrees: {
-                entreeRecipeList.add(recipe);
+                recipeDao.addRecipe(recipe);
+                //entreeRecipeList.add(recipe);
                 break;
             }
             case Appetizers: {
@@ -94,7 +113,8 @@ public class RecipeRepository {
                 drinkRecipeList.add(recipe);
                 break;
             }
-        }
+        } */
+        recipeDao.addRecipe(recipe);
     }
 
     public void incrementCount() {
@@ -118,26 +138,28 @@ public class RecipeRepository {
         }
     }
 
-    public void Remove(int index)
+    public void Remove(Recipe recipe)
     {
-        switch (RecipeRepository.currentCategory) {
-            case Entrees: {
-                entreeRecipeList.remove(index);
-                break;
-            }
-            case Appetizers: {
-                appetizerRecipeList.remove(index);
-                break;
-            }
-            case Desserts: {
-                dessertRecipeList.remove(index);
-                break;
-            }
-            case Drinks: {
-                drinkRecipeList.remove(index);
-                break;
-            }
-        }
+//        switch (RecipeRepository.currentCategory) {
+//            case Entrees: {
+//                //entreeRecipeList.remove(index);
+//                recipeDao.deleteRecipe(recipe);
+//                break;
+//            }
+//            case Appetizers: {
+//                //appetizerRecipeList.remove(index);
+//                break;
+//            }
+//            case Desserts: {
+//                //dessertRecipeList.remove(index);
+//                break;
+//            }
+//            case Drinks: {
+//                //drinkRecipeList.remove(index);
+//                break;
+//            }
+//        }
+        recipeDao.deleteRecipe(recipe);
     }
 
 }

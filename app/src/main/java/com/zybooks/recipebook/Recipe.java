@@ -15,7 +15,7 @@ public class Recipe {
 
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    private int id;
+    private long id;
 
     @ColumnInfo(name = "name")
     private String recipeName;
@@ -26,26 +26,25 @@ public class Recipe {
     @ColumnInfo(name = "instructions")
     private String instructions;
 
+    @ColumnInfo(name = "category_name")
+    private String categoryName;
 
-    /*  private String notes;
+    /*
     @ColumnInfo
     private ImageView picture;
     */
-    private int index;
 
     //constructors
     public Recipe()
     {
-        //catName = "";
+        categoryName = "";
         recipeName = "";
         ingredients = "";
         instructions = "";
-        //notes = "";
-
     }
 
     //accessors
-    public int getId() {return id;}
+    public long getId() { return id; }
     public String getRecipeName()
     {
         return recipeName;
@@ -54,19 +53,16 @@ public class Recipe {
     {
         return ingredients;
     }
-
     public String getInstructions()
     {
         return instructions;
     }
-
-//    //public String getNotes()
-//    {
-//        return notes;
-//    }
-    public int getIndex() {return index; }
+    public String getCategoryName() { return categoryName ; }
 
     //mutators
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public void setRecipeName(String name)
     {
@@ -83,14 +79,7 @@ public class Recipe {
         instructions = string;
     }
 
-//    //public void setNotes(String str)
-//    {
-//        notes = str;
-//    }
-    public void setIndex(int i)
-    {
-        index = i;
-    }
+    public void setCategoryName(String string) { categoryName = string; }
 
     @Override
     public String toString() {
