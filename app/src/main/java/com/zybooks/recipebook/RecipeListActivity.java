@@ -1,27 +1,22 @@
     package com.zybooks.recipebook;
 
     import androidx.appcompat.app.AppCompatActivity;
-    import androidx.fragment.app.Fragment;
-    import androidx.fragment.app.FragmentManager;
     import androidx.fragment.app.FragmentTransaction;
 
-    import android.app.LauncherActivity;
     import android.content.Context;
     import android.content.Intent;
     import android.content.SharedPreferences;
     import android.os.Bundle;
-    import android.util.Log;
-    import android.view.View;
     import android.widget.ArrayAdapter;
-    import android.widget.Button;
     import android.widget.ListView;
     import android.widget.TextView;
     import android.widget.Toast;
 
     import com.google.android.material.floatingactionbutton.FloatingActionButton;
+    import com.zybooks.recipebook.model.Recipe;
+    import com.zybooks.recipebook.repo.RecipeRepository;
 
     import java.util.ArrayList;
-    import java.util.List;
     import java.util.concurrent.atomic.AtomicInteger;
 
     public class RecipeListActivity extends AppCompatActivity {

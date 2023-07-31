@@ -1,4 +1,4 @@
-package com.zybooks.recipebook;
+package com.zybooks.recipebook.model;
 
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
