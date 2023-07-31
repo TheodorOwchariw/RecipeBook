@@ -124,6 +124,7 @@
 
             recipeListView.setOnItemClickListener((parent, view, position, id) -> {
                 selectedPosition.set(position);
+                //delete
                 if (deleteFlag.get() == 1)
                 {
                     Recipe recipeToDelete = adapter.getItem(selectedPosition.get());
@@ -132,13 +133,26 @@
                     adapter.notifyDataSetChanged();
                     deleteFlag.set(0);
                 }
+                // update
                 else if (editFlag.get() == 1) {
-                    RecipeRepository.currentRecipe = adapter.getItem(selectedPosition.get());
-                    View editFragmentView = getLayoutInflater().inflate(R.layout.fragment_recipe_edit, null);
-                    setContentView(editFragmentView);
+//                    RecipeRepository.currentRecipe = adapter.getItem(selectedPosition.get());
+//                    View editFragmentView = getLayoutInflater().inflate(R.layout.fragment_recipe_edit, null);
+//                    setContentView(editFragmentView);
+//                    editFlag.set(0);
 
+
+                    // !!!! **** !!!! 5.1.3
+                    RecipeRepository.currentRecipe = adapter.getItem(selectedPosition.get());
+                    RecipeEditFragment recipeEditFragment = new RecipeEditFragment();
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.fragment_container, recipeEditFragment); // replace the current fragment with recipeEditFragment
+                    transaction.addToBackStack(null); // if you want the previous fragment to be added to the backstack
+                    transaction.commit(); // commit the transaction
                     editFlag.set(0);
+
+
                 }
+                // read
                 else
                 {
                     RecipeRepository.currentRecipe = adapter.getItem(selectedPosition.get());

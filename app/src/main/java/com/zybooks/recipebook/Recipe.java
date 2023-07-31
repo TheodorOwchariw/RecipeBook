@@ -83,6 +83,6 @@ public class Recipe {
 
     @Override
     public String toString() {
-        return this.recipeName;  // Assuming your Recipe class has a recipeName field
+        return this.recipeName;
     }
 }

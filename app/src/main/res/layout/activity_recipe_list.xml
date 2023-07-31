@@ -1,13 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:id="@+id/list_constraint_container"
+
+<FrameLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".RecipeListActivity"
+    android:id="@+id/fragment_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.zybooks.recipebook.MainActivity"
-    android:padding="20dp" >
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+
+        android:id="@+id/list_constraint_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="20dp" >
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -34,64 +48,69 @@
                 />
         </LinearLayout>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab_main"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:fabSize="normal"
-        android:tint="@android:color/white"
-        app:backgroundTint="@android:color/holo_orange_light"
-        android:src="@drawable/uparrow"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        />
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab_main"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fabSize="normal"
+            android:tint="@android:color/white"
+            app:backgroundTint="@android:color/holo_orange_light"
+            android:src="@drawable/uparrow"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
 
-    <!-- delete fab -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/delete"
-        app:fabSize="mini"
-        android:tint="@android:color/white"
-        app:backgroundTint="@android:color/holo_orange_light"
-        app:layout_constraintBottom_toTopOf="@id/fab_main"
-        app:layout_constraintLeft_toLeftOf="@id/fab_main"
+        <!-- delete fab -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/delete"
+            app:fabSize="mini"
+            android:tint="@android:color/white"
+            app:backgroundTint="@android:color/holo_orange_light"
+            app:layout_constraintBottom_toTopOf="@id/fab_main"
+            app:layout_constraintLeft_toLeftOf="@id/fab_main"
 
-        app:layout_constraintRight_toRightOf="@id/fab_main"
-        android:layout_marginBottom="10dp"
-        />
+            app:layout_constraintRight_toRightOf="@id/fab_main"
+            android:layout_marginBottom="10dp"
+            />
 
-    <!-- update fab -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/edit"
-        app:fabSize="mini"
-        android:tint="@android:color/white"
-        app:backgroundTint="@android:color/holo_orange_light"
-        app:layout_constraintBottom_toTopOf="@id/fab1"
-        app:layout_constraintLeft_toLeftOf="@id/fab1"
-        app:layout_constraintRight_toRightOf="@id/fab1"
-        android:layout_marginBottom="10dp"
-        />
+        <!-- update fab -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/edit"
+            app:fabSize="mini"
+            android:tint="@android:color/white"
+            app:backgroundTint="@android:color/holo_orange_light"
+            app:layout_constraintBottom_toTopOf="@id/fab1"
+            app:layout_constraintLeft_toLeftOf="@id/fab1"
+            app:layout_constraintRight_toRightOf="@id/fab1"
+            android:layout_marginBottom="10dp"
+            />
 
-    <!-- add fab -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/add"
-        app:fabSize="mini"
-        android:tint="@android:color/white"
-        app:backgroundTint="@android:color/holo_orange_light"
-        app:layout_constraintBottom_toTopOf="@id/fab2"
-        app:layout_constraintLeft_toLeftOf="@id/fab2"
-        app:layout_constraintRight_toRightOf="@id/fab2"
-        android:layout_marginBottom="10dp"
-        />
+        <!-- add fab -->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/add"
+            app:fabSize="mini"
+            android:tint="@android:color/white"
+            app:backgroundTint="@android:color/holo_orange_light"
+            app:layout_constraintBottom_toTopOf="@id/fab2"
+            app:layout_constraintLeft_toLeftOf="@id/fab2"
+            app:layout_constraintRight_toRightOf="@id/fab2"
+            android:layout_marginBottom="10dp"
+            />
 
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+</FrameLayout>

@@ -4,10 +4,17 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -56,18 +63,36 @@ public class RecipeEditFragment extends Fragment {
         }
     }
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View rootView = inflater.inflate(R.layout.fragment_recipe_edit, container, false);
+        //rootView.setPadding(0, 0, 0, 0);
+        FragmentManager fragmentManager = requireActivity().getSupportFragmentManager();
 
         EditText editRecipeName = rootView.findViewById(R.id.edit_recipe_name);
+        EditText editIngredients = rootView.findViewById(R.id.edit_recipe_ingredients);
+        EditText editInstructions = rootView.findViewById(R.id.edit_recipe_instructions);
+
+        Button editButton = rootView.findViewById(R.id.button_edit);
 
         editRecipeName.setText(RecipeRepository.currentRecipe.getRecipeName());
+        editIngredients.setText(RecipeRepository.currentRecipe.getIngredients());
+        editInstructions.setText(RecipeRepository.currentRecipe.getInstructions());
 
+        editButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Recipe updatedRecipe = RecipeRepository.currentRecipe;
+                updatedRecipe.setRecipeName(editRecipeName.getText().toString());
+                updatedRecipe.setIngredients(editIngredients.getText().toString());
+                updatedRecipe.setInstructions(editInstructions.getText().toString());
+                updatedRecipe.setCategoryName((RecipeRepository.currentCategory).toString());
+                RecipeRepository.getInstance(getContext()).Update(updatedRecipe);
+                Toast.makeText(getActivity(), updatedRecipe.getRecipeName() + " was updated!", Toast.LENGTH_SHORT).show();
+            }
+        });
         return rootView;
-
     }
 }
