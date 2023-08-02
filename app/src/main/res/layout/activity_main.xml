@@ -19,8 +19,8 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
-                android:layout_marginBottom="44dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="30dp"
                 android:gravity="center"
                 android:text="@string/app_name"
 
@@ -39,26 +39,113 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <Button
-                    style="@style/CatButton"
-                    android:text="@string/entrees"
-                    android:onClick="onCategoryClicked"/>
+                <RelativeLayout>
+                    <ImageView
+                        android:id="@+id/image_entreeCat"
+                        style="@style/CatButton"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintDimensionRatio="H,1:1"
+                        />
+                    <Button
+                        style="@style/CatButton"
+                        android:onClick="onCategoryClicked"
+                        android:text="@string/entrees"
+                        android:textColor="@android:color/transparent"
+                        android:background="@android:color/transparent"
+                        />
+                    <TextView
+                        android:layout_width="175dp"
+                        android:layout_height="wrap_content"
+                        android:text="Entrees"
+                        android:layout_alignBottom="@id/image_entreeCat"
+                        android:background="@android:color/holo_orange_light"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:paddingLeft="5dp"
+                        />
+                </RelativeLayout>
 
-                <Button
-                    style="@style/CatButton"
-                    android:text="@string/appetizers"
-                    android:onClick="onCategoryClicked"/>
+                <RelativeLayout>
+                    <ImageView
+                        android:id="@+id/image_appetizerCat"
+                        style="@style/CatButton"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintDimensionRatio="H,1:1"
+                        />
+                    <Button
+                        style="@style/CatButton"
+                        android:onClick="onCategoryClicked"
+                        android:text="@string/appetizers"
+                        android:textColor="@android:color/transparent"
+                        android:background="@android:color/transparent"
+                        />
+                    <TextView
+                        android:layout_width="175dp"
+                        android:layout_height="wrap_content"
+                        android:text="Appetizers"
+                        android:layout_alignBottom="@id/image_appetizerCat"
+                        android:background="@android:color/holo_orange_light"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:paddingLeft="5dp"
+                        />
+                </RelativeLayout>
 
-                <Button
-                    style="@style/CatButton"
-                    android:text="@string/desserts"
-                    android:onClick="onCategoryClicked"/>
+                <RelativeLayout>
+                    <ImageView
+                        android:id="@+id/image_dessertCat"
+                        style="@style/CatButton"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintDimensionRatio="H,1:1"
+                        />
+                    <Button
+                        style="@style/CatButton"
+                        android:onClick="onCategoryClicked"
+                        android:text="@string/desserts"
+                        android:textColor="@android:color/transparent"
+                        android:background="@android:color/transparent"
+                        />
+                    <TextView
+                        android:layout_width="175dp"
+                        android:layout_height="wrap_content"
+                        android:text="Desserts"
+                        android:layout_alignBottom="@id/image_dessertCat"
+                        android:background="@android:color/holo_orange_light"
+                        android:textColor="@color/white"
+                        android:textSize="18dp"
+                        android:paddingLeft="5dp"
+                        />
+                </RelativeLayout>
 
-                <Button
-                    style="@style/CatButton"
-                    android:text="@string/drinks"
-                    android:onClick="onCategoryClicked"/>
-
+                <RelativeLayout>
+                    <ImageView
+                        android:id="@+id/image_drinkCat"
+                        style="@style/CatButton"
+                        android:adjustViewBounds="true"
+                        android:scaleType="centerCrop"
+                        app:layout_constraintDimensionRatio="H,1:1"
+                        />
+                    <Button
+                        style="@style/CatButton"
+                        android:onClick="onCategoryClicked"
+                        android:text="@string/drinks"
+                        android:textColor="@android:color/transparent"
+                        android:background="@android:color/transparent"
+                        />
+                    <TextView
+                        android:layout_width="175dp"
+                        android:layout_height="wrap_content"
+                        android:text="Drinks"
+                        android:textSize="18dp"
+                        android:layout_alignBottom="@id/image_drinkCat"
+                        android:background="@android:color/holo_orange_light"
+                        android:textColor="@color/white"
+                        android:paddingLeft="5dp"
+                        />
+                </RelativeLayout>
             </GridLayout>
 
         </LinearLayout>

@@ -58,8 +58,8 @@ public class RecipeRepository {
         };
 
         RecipeDatabase database = Room.databaseBuilder(context, RecipeDatabase.class, "recipe.db")
-                .allowMainThreadQueries()
-                .addCallback(databaseCallback) //used for threading comment out line above when working on threading
+                .allowMainThreadQueries() // used for getting list of all database entries
+                .addCallback(databaseCallback) //used for creating, updating, or deleting entries
                 .build();
 
         recipeDao = database.recipeDao();

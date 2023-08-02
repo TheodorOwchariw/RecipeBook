@@ -1,5 +1,6 @@
 package com.zybooks.recipebook.model;
 
+import android.net.Uri;
 import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
@@ -28,6 +29,9 @@ public class Recipe {
 
     @ColumnInfo(name = "category_name")
     private String categoryName;
+
+    @ColumnInfo(name = "uri")
+    private String imageUri;
 
     /*
     @ColumnInfo
@@ -59,6 +63,10 @@ public class Recipe {
     }
     public String getCategoryName() { return categoryName ; }
 
+    public String getImageUri() {
+        return imageUri;
+    }
+
     //mutators
     public void setId(int id) {
         this.id = id;
@@ -80,6 +88,10 @@ public class Recipe {
     }
 
     public void setCategoryName(String string) { categoryName = string; }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
+    }
 
     @Override
     public String toString() {
