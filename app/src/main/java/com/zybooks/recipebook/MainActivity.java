@@ -28,6 +28,32 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        ArrayList<Recipe> entreeList = RecipeRepository.getInstance(getApplicationContext()).getEntreeRecipeList();
+        ArrayList<Recipe> appetizerList = RecipeRepository.getInstance(getApplicationContext()).getAppetizerRecipeList();
+        ArrayList<Recipe> dessertList = RecipeRepository.getInstance(getApplicationContext()).getDessertRecipeList();
+        ArrayList<Recipe> drinkList = RecipeRepository.getInstance(getApplicationContext()).getDrinkRecipeList();
+
+        ImageView entreeImageView = findViewById(R.id.image_entreeCat);
+        ImageView appetizerImageView = findViewById(R.id.image_appetizerCat);
+        ImageView dessertImageButton = findViewById(R.id.image_dessertCat);
+        ImageView drinkImageButton = findViewById(R.id.image_drinkCat);
+
+        if (!entreeList.isEmpty())
+        {
+            entreeImageView.setImageURI(Uri.parse(entreeList.get(0).getImageUri()));
+            appetizerImageView.setImageURI(Uri.parse(appetizerList.get(0).getImageUri()));
+            dessertImageButton.setImageURI(Uri.parse(dessertList.get(0).getImageUri()));
+            drinkImageButton.setImageURI(Uri.parse(drinkList.get(0).getImageUri()));
+        }
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+    /*
         ArrayList<Recipe> entreeList = RecipeRepository.getInstance(getApplicationContext()).getEntreeRecipeList();
         ArrayList<Recipe> appetizerList = RecipeRepository.getInstance(getApplicationContext()).getAppetizerRecipeList();
         ArrayList<Recipe> dessertList = RecipeRepository.getInstance(getApplicationContext()).getDessertRecipeList();
@@ -42,7 +68,9 @@ public class MainActivity extends AppCompatActivity {
         appetizerImageView.setImageURI(Uri.parse(appetizerList.get(0).getImageUri()));
         dessertImageButton.setImageURI(Uri.parse(dessertList.get(0).getImageUri()));
         drinkImageButton.setImageURI(Uri.parse(drinkList.get(0).getImageUri()));
+        */
     }
+
     public void onCategoryClicked(View view)
     {
       //  RecipeRepository.getInstance(getApplicationContext()).currentCategory =
@@ -53,4 +81,5 @@ public class MainActivity extends AppCompatActivity {
         intent.putExtra(EXTRA_CATEGORY, category);
         startActivity(intent);
     }
+
 }
